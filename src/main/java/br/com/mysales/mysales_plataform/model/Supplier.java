@@ -1,4 +1,4 @@
-package br.com.mysalles.mysalles_plataform.model;
+package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
 

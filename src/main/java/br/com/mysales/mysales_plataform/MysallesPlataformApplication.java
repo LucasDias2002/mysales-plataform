@@ -1,7 +1,7 @@
-package br.com.mysalles.mysalles_plataform;
+package br.com.mysales.mysales_plataform;
 
-import br.com.mysalles.mysalles_plataform.main.Main;
-import br.com.mysalles.mysalles_plataform.repository.RepositoryClient;
+import br.com.mysales.mysales_plataform.main.Main;
+import br.com.mysales.mysales_plataform.repository.RepositoryClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

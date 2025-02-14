@@ -1,7 +1,6 @@
-package br.com.mysalles.mysalles_plataform.main;
+package br.com.mysales.mysales_plataform.main;
 
-import br.com.mysalles.mysalles_plataform.model.Client;
-import br.com.mysalles.mysalles_plataform.repository.RepositoryClient;
+import br.com.mysales.mysales_plataform.repository.RepositoryClient;
 
 import java.util.Scanner;
 
