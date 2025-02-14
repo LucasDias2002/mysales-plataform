@@ -2,7 +2,9 @@ package br.com.mysalles.mysalles_plataform.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class Supplier {
     @Id
@@ -12,15 +14,16 @@ public class Supplier {
     private String contact;
     private String email;
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Supplier(){}
 
-    public Supplier(String name, String contact, String email, List<Product> products) {
-        this.name = name;
-        this.contact = contact;
-        this.email = email;
-        this.products = products;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

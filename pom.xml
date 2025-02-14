@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.mysalles</groupId>
-	<artifactId>mysalles-plataform</artifactId>
+	<artifactId>mysales-plataform</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mysalles-plataform</name>
 	<description>Sistema de gestão e controle de vendas para pessoas autonomas.</description>

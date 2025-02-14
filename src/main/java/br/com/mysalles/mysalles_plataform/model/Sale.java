@@ -3,6 +3,7 @@ package br.com.mysalles.mysalles_plataform.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,23 +11,27 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Double priceFinal;
-    @ManyToOne()
-    private List<Product> products;
+    @OneToMany(mappedBy = "sales", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
+
     private LocalDate date;
     private Double debit;
     private Boolean paid;
+
     @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     public Sale(){}
 
-    public Sale(Double priceFinal, LocalDate date, Double debit, Boolean paid, Client client) {
-        this.priceFinal = priceFinal;
-        this.date = date;
-        this.debit = debit;
-        this.paid = paid;
-        this.client = client;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getPriceFinal() {

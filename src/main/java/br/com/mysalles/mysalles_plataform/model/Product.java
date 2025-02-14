@@ -2,6 +2,7 @@ package br.com.mysalles.mysalles_plataform.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,20 +10,33 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private Double price;
     private String description;
+
     @ManyToOne
     private Supplier supplier;
-    @ManyToMany(mappedBy = "products")
-    private List<Sale> sales;
+
+    @ManyToOne()
+    private Sale sales;
 
     public Product (){}
 
-    public Product(String name, Double price, String description) {
+    public Product(String name, Double price, String description, Supplier supplier, Sale sales) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.supplier = supplier;
+        this.sales = sales;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -55,5 +69,13 @@ public class Product {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public Sale getSales() {
+        return sales;
+    }
+
+    public void setSales(Sale sales) {
+        this.sales = sales;
     }
 }
