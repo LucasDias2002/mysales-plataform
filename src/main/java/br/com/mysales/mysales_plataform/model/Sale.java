@@ -13,8 +13,8 @@ public class Sale {
     private Long id;
 
     private Double priceFinal;
-    @OneToMany(mappedBy = "sales", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SaleItem> products = new ArrayList<>();
 
     private LocalDate date;
     private Double debit;
@@ -42,11 +42,11 @@ public class Sale {
         this.priceFinal = priceFinal;
     }
 
-    public List<Product> getProducts() {
+    public List<SaleItem> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<SaleItem> products) {
         this.products = products;
     }
 

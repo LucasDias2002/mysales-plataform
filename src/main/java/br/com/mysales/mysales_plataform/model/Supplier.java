@@ -18,6 +18,12 @@ public class Supplier {
 
     public Supplier(){}
 
+    public Supplier(String name, String contact, String email) {
+        this.name = name;
+        this.contact = contact;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,5 +62,10 @@ public class Supplier {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + name + "\nContato: " + contact + "\nEmail: " + email + "\n********************";
     }
 }

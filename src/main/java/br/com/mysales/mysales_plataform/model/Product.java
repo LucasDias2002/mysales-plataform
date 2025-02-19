@@ -2,6 +2,9 @@ package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Product {
     @Id
@@ -15,17 +18,16 @@ public class Product {
     @ManyToOne
     private Supplier supplier;
 
-    @ManyToOne()
-    private Sale sales;
+    @OneToMany(mappedBy = "product")
+    private List<SaleItem> sales = new ArrayList<>();
 
     public Product (){}
 
-    public Product(String name, Double price, String description, Supplier supplier, Sale sales) {
+    public Product(String name, Double price, String description, Supplier supplier) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.supplier = supplier;
-        this.sales = sales;
     }
 
     public Long getId() {
@@ -68,11 +70,16 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public Sale getSales() {
+    public List<SaleItem> getSales() {
         return sales;
     }
 
-    public void setSales(Sale sales) {
+    public void setSales(List<SaleItem> sales) {
         this.sales = sales;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + name + "\nPreço: " + price + "\nDescrição: " + description + "\n***********************";
     }
 }
