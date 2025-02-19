@@ -18,13 +18,22 @@ public class ClientController {
     ClientService service;
 
     @GetMapping
-    public List<ClientDTO> listClients(){
-        return service.listClients();
+    public List<ClientDTO> list(){
+        return service.list();
     }
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody Client client){
-        Client newClient = service.saveClient(client);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newClient);
+    public List<ClientDTO> create(@RequestBody Client client){
+        return service.create(client);
+    }
+
+    @PutMapping
+    public List<ClientDTO> update(@RequestBody Client client){
+        return service.update(client);
+    }
+
+    @DeleteMapping("{id}")
+    public List<ClientDTO> delete(@PathVariable Long id){
+        return service.delete(id);
     }
 }

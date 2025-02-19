@@ -2,10 +2,12 @@ package br.com.mysales.mysales_plataform.service;
 
 import br.com.mysales.mysales_plataform.dto.ClientDTO;
 import br.com.mysales.mysales_plataform.model.Client;
-import br.com.mysales.mysales_plataform.repository.RepositoryClient;
+import br.com.mysales.mysales_plataform.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,15 +15,27 @@ import java.util.stream.Collectors;
 public class ClientService {
 
     @Autowired
-    RepositoryClient repository;
+    ClientRepository repository;
 
-    public List<ClientDTO> listClients(){
+    public List<ClientDTO> list(){
         return repository.findAll().stream()
+                .sorted(Comparator.comparing(Client::getName))
                 .map(c -> new ClientDTO(c.getId(), c.getName(), c.getContact()))
                 .collect(Collectors.toList());
     }
 
-    public Client saveClient(Client client){
-        return repository.save(client);
+    public List<ClientDTO> create(Client client){
+        repository.save(client);
+        return list();
+    }
+
+    public List<ClientDTO> update(Client client){
+        repository.save(client);
+        return list();
+    }
+
+    public List<ClientDTO> delete(Long id){
+        repository.deleteById(id);
+        return list();
     }
 }
