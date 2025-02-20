@@ -13,7 +13,7 @@ public class Supplier {
     private String name;
     private String contact;
     private String email;
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
 
     public Supplier(){}
