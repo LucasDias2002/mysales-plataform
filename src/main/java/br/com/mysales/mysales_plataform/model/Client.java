@@ -13,7 +13,7 @@ public class Client {
     private String name;
     private String contact;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Sale> sales = new ArrayList<>();
 
     public Client(){}

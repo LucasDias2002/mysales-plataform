@@ -1,8 +1,11 @@
 package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +16,11 @@ public class Sale {
     private Long id;
 
     private Double priceFinal;
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<SaleItem> products = new ArrayList<>();
 
-    private LocalDate date;
+    @CreationTimestamp
+    private LocalDateTime date;
     private Double debit;
     private Boolean paid;
 
@@ -25,6 +29,13 @@ public class Sale {
     private Client client;
 
     public Sale(){}
+
+    public Sale(Double priceFinal, Double debit, Boolean paid, Client client) {
+        this.priceFinal = priceFinal;
+        this.debit = debit;
+        this.paid = paid;
+        this.client = client;
+    }
 
     public Long getId() {
         return id;
@@ -50,11 +61,11 @@ public class Sale {
         this.products = products;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -80,5 +91,18 @@ public class Sale {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "id=" + id +
+                ", priceFinal=" + priceFinal +
+                ", products=" + products +
+                ", date=" + date +
+                ", debit=" + debit +
+                ", paid=" + paid +
+                ", client_id=" + client +
+                '}';
     }
 }
