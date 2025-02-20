@@ -1,21 +1,37 @@
 package br.com.mysales.mysales_plataform.controller;
 
+import br.com.mysales.mysales_plataform.dto.SupplierDTO;
 import br.com.mysales.mysales_plataform.model.Supplier;
-import br.com.mysales.mysales_plataform.repository.RepositorySupplier;
+import br.com.mysales.mysales_plataform.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/supplier")
 public class SupplierController {
 
     @Autowired
-    RepositorySupplier repository;
+    SupplierService service;
 
     @GetMapping
-    public List<Supplier> ListSupplier(){
-        return repository.findAll();
+    public List<SupplierDTO> list(){
+        return service.list();
+    }
+
+    @PostMapping
+    public List<SupplierDTO> create(@RequestBody Supplier supplier) {
+        return service.create(supplier);
+    }
+
+    @PutMapping
+    public List<SupplierDTO> update(@RequestBody Supplier product) {
+        return service.update(product);
+    }
+
+    @DeleteMapping("{id}")
+    public List<SupplierDTO> delete(@PathVariable Long id) {
+        return service.delete(id);
     }
 }
