@@ -1,6 +1,8 @@
 package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +18,15 @@ public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String contact;
+
+    @NotBlank
+    @Email(message = "O email digitado é invalido!")
     private String email;
     @OneToMany(mappedBy = "supplier", fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();

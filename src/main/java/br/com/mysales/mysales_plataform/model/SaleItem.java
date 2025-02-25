@@ -1,6 +1,7 @@
 package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +15,9 @@ public class SaleItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Positive
     private int quantity;
+    @Positive
     private double unitPrice;
 
     @ManyToOne

@@ -1,7 +1,7 @@
 package br.com.mysales.mysales_plataform.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +18,10 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+
+    @NotBlank
     private String name;
+    @NotBlank
     private String contact;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
