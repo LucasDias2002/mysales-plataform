@@ -7,5 +7,5 @@ public record SaleDTO(Long id,
                       LocalDateTime date,
                       Double debit,
                       Boolean paid,
-                      Long client) {
+                      Long client_id) {
 }
