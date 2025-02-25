@@ -26,8 +26,8 @@ public class SupplierController {
     }
 
     @PutMapping
-    public List<SupplierDTO> update(@RequestBody Supplier product) {
-        return service.update(product);
+    public List<SupplierDTO> update(@RequestBody Supplier supplier) {
+        return service.update(supplier);
     }
 
     @DeleteMapping("{id}")

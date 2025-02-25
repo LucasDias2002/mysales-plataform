@@ -8,6 +8,7 @@ import br.com.mysales.mysales_plataform.repository.ClientRepository;
 import br.com.mysales.mysales_plataform.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +32,7 @@ public class SaleService {
 
     }
 
+    @Transactional
     public List<SaleDTO> create(Sale sale){
         Optional<Client> client = ClientRepository.findById(sale.getClient().getId());
         client.ifPresent(sale::setClient);
@@ -43,11 +45,13 @@ public class SaleService {
         return list();
     }
 
+    @Transactional
     public List<SaleDTO> update(Sale sale) {
         repository.save(sale);
         return list();
     }
 
+    @Transactional
     public List<SaleDTO> delete(Long id){
         repository.deleteById(id);
         return list();

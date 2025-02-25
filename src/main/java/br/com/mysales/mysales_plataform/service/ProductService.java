@@ -5,6 +5,7 @@ import br.com.mysales.mysales_plataform.model.Product;
 import br.com.mysales.mysales_plataform.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,16 +24,19 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public List<ProductDTO> create(Product product){
         repository.save(product);
         return list();
     }
 
+    @Transactional
     public List<ProductDTO> update(Product product){
         repository.save(product);
         return list();
     }
 
+    @Transactional
     public List<ProductDTO> delete(Long id){
         repository.deleteById(id);
         return list();
