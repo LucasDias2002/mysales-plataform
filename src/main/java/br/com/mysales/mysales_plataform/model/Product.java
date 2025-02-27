@@ -37,4 +37,13 @@ public class Product {
         this.description = description;
         this.supplier = supplier;
     }
+    
+    public void updateProduct(Product product){
+        if(product.getName() != null)
+            this.name = product.getName();
+        if(product.getPrice() != null)
+            this.price = product.getPrice();
+        if(product.getDescription() != null)
+            this.description = product.getDescription();
+    }
 }

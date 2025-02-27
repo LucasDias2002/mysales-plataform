@@ -14,9 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -30,5 +28,12 @@ public class Client {
     public Client(String name, String contact) {
         this.name = name;
         this.contact = contact;
+    }
+
+    public void updateClient(Client client){
+        if(client.getName() != null)
+            this.name = client.getName();
+        if(client.getContact() != null)
+            this.contact = client.getContact();
     }
 }

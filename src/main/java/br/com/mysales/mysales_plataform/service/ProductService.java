@@ -32,7 +32,9 @@ public class ProductService {
 
     @Transactional
     public List<ProductDTO> update(Product product){
-        repository.save(product);
+        var produtoBD = repository.findById(product.getId());
+        if(produtoBD.isPresent())
+            produtoBD.get().updateProduct(product);
         return list();
     }
 

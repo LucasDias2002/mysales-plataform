@@ -32,7 +32,9 @@ public class SupplierService {
 
     @Transactional
     public List<SupplierDTO> update(Supplier supplier){
-        repository.save(supplier);
+        var supplierBD = repository.findById(supplier.getId());
+        if(supplierBD.isPresent())
+            supplierBD.get().updateSupplier(supplier);
         return list();
     }
 

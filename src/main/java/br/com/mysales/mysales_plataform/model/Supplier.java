@@ -36,4 +36,13 @@ public class Supplier {
         this.contact = contact;
         this.email = email;
     }
+
+    public void updateSupplier(Supplier supplier){
+        if(supplier.getName() != null)
+            this.name = supplier.getName();
+        if(supplier.getContact() != null)
+            this.contact = supplier.getContact();
+        if(supplier.getEmail() != null)
+            this.email = supplier.getEmail();
+    }
 }

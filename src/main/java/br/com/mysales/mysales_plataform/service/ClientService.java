@@ -32,7 +32,9 @@ public class ClientService {
 
     @Transactional
     public List<ClientDTO> update(Client client){
-        repository.save(client);
+        var clientBD = repository.findById(client.getId());
+        if(clientBD.isPresent())
+            clientBD.get().updateClient(client);
         return list();
     }
 

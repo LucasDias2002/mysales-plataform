@@ -43,4 +43,11 @@ public class Sale {
         this.paid = paid;
         this.client = client;
     }
+
+    public void updateSale(Sale sale){
+        if(sale.getDebit() != null)
+            this.debit -= sale.getDebit();
+        if(sale.getPaid() != null)
+            this.paid = sale.getPaid();
+    }
 }

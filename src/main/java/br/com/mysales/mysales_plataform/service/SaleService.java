@@ -47,7 +47,9 @@ public class SaleService {
 
     @Transactional
     public List<SaleDTO> update(Sale sale) {
-        repository.save(sale);
+        var saleBD = repository.findById(sale.getId());
+        if(saleBD.isPresent())
+            saleBD.get().updateSale(sale);
         return list();
     }
 
