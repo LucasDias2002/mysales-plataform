@@ -18,7 +18,7 @@ public class ProductService {
     ProductRepository repository;
 
     public List<ProductDTO> list(){
-        return repository.findAll().stream()
+        return repository.findAllByActiveTrue().stream()
                 .sorted(Comparator.comparing(Product::getId))
                 .map(p -> new ProductDTO(p.getId(), p.getName(), p.getPrice(), p.getDescription()))
                 .collect(Collectors.toList());
@@ -32,15 +32,15 @@ public class ProductService {
 
     @Transactional
     public List<ProductDTO> update(Product product){
-        var produtoBD = repository.findById(product.getId());
-        if(produtoBD.isPresent())
-            produtoBD.get().updateProduct(product);
+        var produtoBD = repository.getReferenceById(product.getId());
+        produtoBD.updateProduct(product);
         return list();
     }
 
     @Transactional
     public List<ProductDTO> delete(Long id){
-        repository.deleteById(id);
+        var product = repository.getReferenceById(id);
+        product.updateActive();
         return list();
     }
 }

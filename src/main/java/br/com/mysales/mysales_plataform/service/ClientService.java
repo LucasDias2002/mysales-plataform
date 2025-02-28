@@ -18,7 +18,7 @@ public class ClientService {
     ClientRepository repository;
 
     public List<ClientDTO> list(){
-        return repository.findAll().stream()
+        return repository.findAllByActiveTrue().stream()
                 .sorted(Comparator.comparing(Client::getName))
                 .map(c -> new ClientDTO(c.getId(), c.getName(), c.getContact()))
                 .collect(Collectors.toList());
@@ -32,15 +32,15 @@ public class ClientService {
 
     @Transactional
     public List<ClientDTO> update(Client client){
-        var clientBD = repository.findById(client.getId());
-        if(clientBD.isPresent())
-            clientBD.get().updateClient(client);
+        var clientBD = repository.getReferenceById(client.getId());
+        clientBD.updateClient(client);
         return list();
     }
 
     @Transactional
     public List<ClientDTO> delete(Long id){
-        repository.deleteById(id);
+        var client = repository.getReferenceById(id);
+        client.updateActive();
         return list();
     }
 }

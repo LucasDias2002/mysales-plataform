@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Supplier {
     @Id
@@ -24,6 +23,7 @@ public class Supplier {
 
     @NotBlank
     private String contact;
+    private Boolean active = true;
 
     @NotBlank
     @Email(message = "O email digitado é invalido!")
@@ -44,5 +44,9 @@ public class Supplier {
             this.contact = supplier.getContact();
         if(supplier.getEmail() != null)
             this.email = supplier.getEmail();
+    }
+
+    public void updateActive(){
+        this.active = false;
     }
 }

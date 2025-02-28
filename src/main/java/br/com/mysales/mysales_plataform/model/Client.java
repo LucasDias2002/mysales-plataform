@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Client {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +20,8 @@ public class Client {
     private String name;
     @NotBlank
     private String contact;
+
+    private Boolean active = true;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Sale> sales = new ArrayList<>();
@@ -35,5 +36,9 @@ public class Client {
             this.name = client.getName();
         if(client.getContact() != null)
             this.contact = client.getContact();
+    }
+
+    public void updateActive(){
+        this.active = false;
     }
 }

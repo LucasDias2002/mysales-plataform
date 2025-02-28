@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Product {
     @Id
@@ -24,6 +23,7 @@ public class Product {
     @Positive
     private Double price;
     private String description;
+    private Boolean active = true;
 
     @ManyToOne
     private Supplier supplier;
@@ -45,5 +45,9 @@ public class Product {
             this.price = product.getPrice();
         if(product.getDescription() != null)
             this.description = product.getDescription();
+    }
+
+    public void updateActive(){
+        this.active = false;
     }
 }

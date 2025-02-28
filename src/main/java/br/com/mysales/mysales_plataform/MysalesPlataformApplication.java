@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MysalesPlataformApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MysalesPlataformApplication.class, args);
+		 SpringApplication.run(MysalesPlataformApplication.class, args);
 	}
 
 }

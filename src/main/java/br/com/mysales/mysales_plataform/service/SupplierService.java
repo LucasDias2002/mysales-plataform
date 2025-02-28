@@ -18,7 +18,7 @@ public class SupplierService {
     SupplierRepository repository;
 
     public List<SupplierDTO> list(){
-        return repository.findAll().stream()
+        return repository.findAllByActiveTrue().stream()
                 .sorted(Comparator.comparing(Supplier::getId))
                 .map(s -> new SupplierDTO(s.getId(),s.getName(), s.getContact(), s.getEmail()))
                 .collect(Collectors.toList());
@@ -32,15 +32,15 @@ public class SupplierService {
 
     @Transactional
     public List<SupplierDTO> update(Supplier supplier){
-        var supplierBD = repository.findById(supplier.getId());
-        if(supplierBD.isPresent())
-            supplierBD.get().updateSupplier(supplier);
+        var supplierBD = repository.getReferenceById(supplier.getId());
+        supplierBD.updateSupplier(supplier);
         return list();
     }
 
     @Transactional
     public List<SupplierDTO> delete(Long id){
-        repository.deleteById(id);
+        var supplier = repository.getReferenceById(id);
+        supplier.updateActive();
         return list();
     }
 }
