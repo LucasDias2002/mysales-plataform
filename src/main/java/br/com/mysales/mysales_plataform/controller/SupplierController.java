@@ -21,17 +21,17 @@ public class SupplierController {
     }
 
     @PostMapping
-    public List<SupplierDTO> create(@RequestBody Supplier supplier) {
+    public SupplierDTO create(@RequestBody Supplier supplier) {
         return service.create(supplier);
     }
 
     @PutMapping
-    public List<SupplierDTO> update(@RequestBody Supplier supplier) {
+    public SupplierDTO update(@RequestBody Supplier supplier) {
         return service.update(supplier);
     }
 
     @DeleteMapping("{id}")
-    public List<SupplierDTO> delete(@PathVariable Long id) {
+    public SupplierDTO delete(@PathVariable Long id) {
         return service.delete(id);
     }
 }

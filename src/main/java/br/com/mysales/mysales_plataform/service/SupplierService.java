@@ -1,5 +1,6 @@
 package br.com.mysales.mysales_plataform.service;
 
+import br.com.mysales.mysales_plataform.dto.SaleDTO;
 import br.com.mysales.mysales_plataform.dto.SupplierDTO;
 import br.com.mysales.mysales_plataform.model.Supplier;
 import br.com.mysales.mysales_plataform.repository.SupplierRepository;
@@ -25,22 +26,21 @@ public class SupplierService {
     }
 
     @Transactional
-    public List<SupplierDTO> create(Supplier supplier){
-        repository.save(supplier);
-        return list();
+    public SupplierDTO create(Supplier supplier){
+        return new SupplierDTO(repository.save(supplier));
     }
 
     @Transactional
-    public List<SupplierDTO> update(Supplier supplier){
+    public SupplierDTO update(Supplier supplier){
         var supplierBD = repository.getReferenceById(supplier.getId());
         supplierBD.updateSupplier(supplier);
-        return list();
+        return new SupplierDTO(supplierBD);
     }
 
     @Transactional
-    public List<SupplierDTO> delete(Long id){
+    public SupplierDTO delete(Long id){
         var supplier = repository.getReferenceById(id);
         supplier.updateActive();
-        return list();
+        return new SupplierDTO(supplier);
     }
 }

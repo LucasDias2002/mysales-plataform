@@ -53,7 +53,7 @@ public class Sale {
         return sale;
     }
 
-    public Sale updateActive(){
+    public void updateActive(){
         this.active = false;
     }
 }

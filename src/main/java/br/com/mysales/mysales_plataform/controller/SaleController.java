@@ -31,7 +31,7 @@ public class SaleController {
     }
 
     @DeleteMapping("{id}")
-    public SaleDTO update(@PathVariable Long id){
+    public SaleDTO delete(@PathVariable Long id){
         return service.delete(id);
     }
 }
