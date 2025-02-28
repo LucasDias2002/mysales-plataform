@@ -21,20 +21,17 @@ public class SaleController {
     }
 
     @PostMapping
-    public List<SaleDTO> create(@RequestBody Sale sale){
-        service.create(sale);
-        return service.list();
+    public SaleDTO create(@RequestBody Sale sale){
+        return service.create(sale);
     }
 
     @PutMapping
-    public List<SaleDTO> update(@RequestBody Sale sale){
-        service.update(sale);
-        return service.list();
+    public SaleDTO update(@RequestBody Sale sale){
+        return service.update(sale);
     }
 
     @DeleteMapping("{id}")
-    public List<SaleDTO> update(@PathVariable Long id){
-        service.delete(id);
-        return service.list();
+    public SaleDTO update(@PathVariable Long id){
+        return service.delete(id);
     }
 }

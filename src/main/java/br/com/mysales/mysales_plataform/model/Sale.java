@@ -32,6 +32,7 @@ public class Sale {
     @NotNull
     private Double debit;
     private Boolean paid;
+    private Boolean active = true;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
@@ -44,10 +45,15 @@ public class Sale {
         this.client = client;
     }
 
-    public void updateSale(Sale sale){
+    public Sale updateSale(Sale sale){
         if(sale.getDebit() != null)
             this.debit -= sale.getDebit();
         if(sale.getPaid() != null)
             this.paid = sale.getPaid();
+        return sale;
+    }
+
+    public Sale updateActive(){
+        this.active = false;
     }
 }

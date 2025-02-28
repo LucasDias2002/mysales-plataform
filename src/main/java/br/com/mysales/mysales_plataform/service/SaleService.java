@@ -33,7 +33,7 @@ public class SaleService {
     }
 
     @Transactional
-    public List<SaleDTO> create(Sale sale){
+    public SaleDTO create(Sale sale){
         Optional<Client> client = ClientRepository.findById(sale.getClient().getId());
         client.ifPresent(sale::setClient);
 
@@ -41,20 +41,19 @@ public class SaleService {
             item.setSale(sale);
         }
 
-        repository.save(sale);
-        return list();
+        return new SaleDTO(repository.save(sale));
     }
 
     @Transactional
-    public List<SaleDTO> update(Sale sale) {
+    public SaleDTO update(Sale sale) {
         var saleBD = repository.getReferenceById(sale.getId());
-        saleBD.updateSale(sale);
-        return list();
+        return new SaleDTO(saleBD.updateSale(sale));
     }
 
     @Transactional
-    public List<SaleDTO> delete(Long id){
-        repository.deleteById(id);
-        return list();
+    public SaleDTO delete(Long id){
+        var sale = repository.getReferenceById(id);
+        sale.updateActive();
+        return new SaleDTO(sale);
     }
 }
