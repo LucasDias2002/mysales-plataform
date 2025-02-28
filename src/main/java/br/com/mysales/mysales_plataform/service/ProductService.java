@@ -25,22 +25,21 @@ public class ProductService {
     }
 
     @Transactional
-    public List<ProductDTO> create(Product product){
-        repository.save(product);
-        return list();
+    public ProductDTO create(Product product){
+        return new ProductDTO(repository.save(product));
     }
 
     @Transactional
-    public List<ProductDTO> update(Product product){
+    public ProductDTO update(Product product){
         var produtoBD = repository.getReferenceById(product.getId());
         produtoBD.updateProduct(product);
-        return list();
+        return new ProductDTO(produtoBD);
     }
 
     @Transactional
-    public List<ProductDTO> delete(Long id){
+    public ProductDTO delete(Long id){
         var product = repository.getReferenceById(id);
         product.updateActive();
-        return list();
+        return new ProductDTO(product);
     }
 }

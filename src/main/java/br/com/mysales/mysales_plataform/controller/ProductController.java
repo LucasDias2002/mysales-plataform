@@ -21,17 +21,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public List<ProductDTO> create(@RequestBody Product product) {
+    public ProductDTO create(@RequestBody Product product) {
         return service.create(product);
     }
 
     @PutMapping
-    public List<ProductDTO> update(@RequestBody Product product) {
+    public ProductDTO update(@RequestBody Product product) {
         return service.update(product);
     }
 
     @DeleteMapping("{id}")
-    public List<ProductDTO> delete(@PathVariable Long id) {
+    public ProductDTO delete(@PathVariable Long id) {
         return service.delete(id);
     }
 }
