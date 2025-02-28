@@ -25,22 +25,20 @@ public class ClientService {
     }
 
     @Transactional
-    public List<ClientDTO> create(Client client){
-        repository.save(client);
-        return list();
+    public ClientDTO create(Client client) {
+        return new ClientDTO(repository.save(client));
     }
-
     @Transactional
-    public List<ClientDTO> update(Client client){
+    public ClientDTO update(Client client){
         var clientBD = repository.getReferenceById(client.getId());
         clientBD.updateClient(client);
-        return list();
+        return new ClientDTO(clientBD);
     }
 
     @Transactional
-    public List<ClientDTO> delete(Long id){
+    public ClientDTO delete(Long id){
         var client = repository.getReferenceById(id);
         client.updateActive();
-        return list();
+        return new ClientDTO(client);
     }
 }

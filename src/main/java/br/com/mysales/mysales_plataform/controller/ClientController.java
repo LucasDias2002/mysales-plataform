@@ -23,17 +23,17 @@ public class ClientController {
     }
 
     @PostMapping
-    public List<ClientDTO> create(@RequestBody Client client){
+    public ClientDTO create(@RequestBody Client client){
         return service.create(client);
     }
 
     @PutMapping
-    public List<ClientDTO> update(@RequestBody Client client){
+    public ClientDTO update(@RequestBody Client client){
         return service.update(client);
     }
 
     @DeleteMapping("{id}")
-    public List<ClientDTO> delete(@PathVariable Long id){
+    public ClientDTO delete(@PathVariable Long id){
         return service.delete(id);
     }
 }
