@@ -4,7 +4,9 @@ import br.com.mysales.mysales_plataform.dto.SupplierDTO;
 import br.com.mysales.mysales_plataform.model.Supplier;
 import br.com.mysales.mysales_plataform.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -16,22 +18,25 @@ public class SupplierController {
     SupplierService service;
 
     @GetMapping
-    public List<SupplierDTO> list(){
-        return service.list();
+    public ResponseEntity<List<SupplierDTO>> list(){
+        return ResponseEntity.ok(service.list());
     }
 
     @PostMapping
-    public SupplierDTO create(@RequestBody Supplier supplier) {
-        return service.create(supplier);
+    public ResponseEntity<SupplierDTO> create(@RequestBody Supplier supplier, UriComponentsBuilder uriBuilder) {
+        var supplierDTO = service.create(supplier);
+        var uri = uriBuilder.path("/supplier/{id}").buildAndExpand(supplierDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(supplierDTO);
     }
 
     @PutMapping
-    public SupplierDTO update(@RequestBody Supplier supplier) {
-        return service.update(supplier);
+    public ResponseEntity<SupplierDTO> update(@RequestBody Supplier supplier) {
+        return ResponseEntity.ok(service.update(supplier));
     }
 
     @DeleteMapping("{id}")
-    public SupplierDTO delete(@PathVariable Long id) {
-        return service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
