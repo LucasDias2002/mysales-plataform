@@ -4,7 +4,9 @@ import br.com.mysales.mysales_plataform.dto.ProductDTO;
 import br.com.mysales.mysales_plataform.model.Product;
 import br.com.mysales.mysales_plataform.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -16,22 +18,25 @@ public class ProductController {
     ProductService service;
 
     @GetMapping()
-    public List<ProductDTO> list() {
-        return service.list();
+    public ResponseEntity<List<ProductDTO>> list() {
+        return ResponseEntity.ok(service.list());
     }
 
     @PostMapping
-    public ProductDTO create(@RequestBody Product product) {
-        return service.create(product);
+    public ResponseEntity<ProductDTO> create(@RequestBody Product product, UriComponentsBuilder uriBuilder) {
+        var productDTO = service.create(product);
+        var uri = uriBuilder.path("/product/{id}").buildAndExpand(productDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(productDTO);
     }
 
     @PutMapping
-    public ProductDTO update(@RequestBody Product product) {
-        return service.update(product);
+    public ResponseEntity<ProductDTO> update(@RequestBody Product product) {
+        return ResponseEntity.ok(service.update(product));
     }
 
     @DeleteMapping("{id}")
-    public ProductDTO delete(@PathVariable Long id) {
-        return service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
