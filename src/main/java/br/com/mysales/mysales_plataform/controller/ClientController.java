@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -18,22 +19,25 @@ public class ClientController {
     ClientService service;
 
     @GetMapping
-    public List<ClientDTO> list(){
-        return service.list();
+    public ResponseEntity<List<ClientDTO>> list(){
+        return ResponseEntity.ok(service.list());
     }
 
     @PostMapping
-    public ClientDTO create(@RequestBody Client client){
-        return service.create(client);
+    public ResponseEntity<ClientDTO> create(@RequestBody Client client, UriComponentsBuilder uriBuilder){
+        var clientDTO = service.create(client);
+        var uri = uriBuilder.path("/client/{id}").buildAndExpand(clientDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(clientDTO);
     }
 
     @PutMapping
-    public ClientDTO update(@RequestBody Client client){
-        return service.update(client);
+    public ResponseEntity<ClientDTO> update(@RequestBody Client client){
+        return ResponseEntity.ok(service.update(client));
     }
 
     @DeleteMapping("{id}")
-    public ClientDTO delete(@PathVariable Long id){
-        return service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
