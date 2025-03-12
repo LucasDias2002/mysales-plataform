@@ -24,6 +24,10 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
+    public ClientDTO listId(long id){
+        return new ClientDTO(repository.getReferenceById(id));
+    }
+
     @Transactional
     public ClientDTO create(Client client) {
         return new ClientDTO(repository.save(client));

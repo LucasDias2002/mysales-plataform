@@ -1,5 +1,6 @@
 package br.com.mysales.mysales_plataform.controller;
 
+import br.com.mysales.mysales_plataform.dto.SaleDTO;
 import br.com.mysales.mysales_plataform.dto.SupplierDTO;
 import br.com.mysales.mysales_plataform.model.Supplier;
 import br.com.mysales.mysales_plataform.service.SupplierService;
@@ -20,6 +21,11 @@ public class SupplierController {
     @GetMapping
     public ResponseEntity<List<SupplierDTO>> list(){
         return ResponseEntity.ok(service.list());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<SupplierDTO> listId(@PathVariable Long id){
+        return ResponseEntity.ok(service.listId(id));
     }
 
     @PostMapping

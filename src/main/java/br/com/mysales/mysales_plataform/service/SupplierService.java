@@ -25,6 +25,10 @@ public class SupplierService {
                 .collect(Collectors.toList());
     }
 
+    public SupplierDTO listId(Long id){
+        return new SupplierDTO(repository.getReferenceById(id));
+    }
+
     @Transactional
     public SupplierDTO create(Supplier supplier){
         return new SupplierDTO(repository.save(supplier));

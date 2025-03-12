@@ -22,6 +22,11 @@ public class SaleController {
        return ResponseEntity.ok(service.list());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<SaleDTO> listId(@PathVariable Long id){
+        return ResponseEntity.ok(service.listId(id));
+    }
+
     @PostMapping
     public ResponseEntity<SaleDTO> create(@RequestBody Sale sale, UriComponentsBuilder uriBuilder){
         var saleDTO = service.create(sale);

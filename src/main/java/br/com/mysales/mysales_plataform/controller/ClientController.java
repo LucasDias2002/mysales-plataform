@@ -23,6 +23,11 @@ public class ClientController {
         return ResponseEntity.ok(service.list());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<ClientDTO> listId(@PathVariable Long id){
+        return ResponseEntity.ok(service.listId(id));
+    }
+
     @PostMapping
     public ResponseEntity<ClientDTO> create(@RequestBody Client client, UriComponentsBuilder uriBuilder){
         var clientDTO = service.create(client);

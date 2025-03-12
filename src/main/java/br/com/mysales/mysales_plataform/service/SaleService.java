@@ -32,6 +32,10 @@ public class SaleService {
 
     }
 
+    public SaleDTO listId(Long id){
+        return new SaleDTO(repository.getReferenceById(id));
+    }
+
     @Transactional
     public SaleDTO create(Sale sale){
         Optional<Client> client = ClientRepository.findById(sale.getClient().getId());

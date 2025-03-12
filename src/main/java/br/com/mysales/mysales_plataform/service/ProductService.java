@@ -24,6 +24,10 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public ProductDTO listId(Long id){
+        return new ProductDTO(repository.getReferenceById(id));
+    }
+
     @Transactional
     public ProductDTO create(Product product){
         return new ProductDTO(repository.save(product));
