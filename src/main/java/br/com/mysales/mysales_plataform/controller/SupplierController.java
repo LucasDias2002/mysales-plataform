@@ -4,6 +4,7 @@ import br.com.mysales.mysales_plataform.dto.SaleDTO;
 import br.com.mysales.mysales_plataform.dto.SupplierDTO;
 import br.com.mysales.mysales_plataform.model.Supplier;
 import br.com.mysales.mysales_plataform.service.SupplierService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<SupplierDTO> create(@RequestBody Supplier supplier, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<SupplierDTO> create(@Valid @RequestBody Supplier supplier, UriComponentsBuilder uriBuilder) {
         var supplierDTO = service.create(supplier);
         var uri = uriBuilder.path("/supplier/{id}").buildAndExpand(supplierDTO.id()).toUri();
         return ResponseEntity.created(uri).body(supplierDTO);

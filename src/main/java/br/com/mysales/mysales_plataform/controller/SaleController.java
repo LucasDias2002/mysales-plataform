@@ -3,6 +3,7 @@ package br.com.mysales.mysales_plataform.controller;
 import br.com.mysales.mysales_plataform.dto.SaleDTO;
 import br.com.mysales.mysales_plataform.model.Sale;
 import br.com.mysales.mysales_plataform.service.SaleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class SaleController {
     }
 
     @PostMapping
-    public ResponseEntity<SaleDTO> create(@RequestBody Sale sale, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SaleDTO> create(@Valid @RequestBody Sale sale, UriComponentsBuilder uriBuilder){
         var saleDTO = service.create(sale);
         var uri = uriBuilder.path("/sale/{id}").buildAndExpand(saleDTO.client_id()).toUri();
         return ResponseEntity.created(uri).body(saleDTO);

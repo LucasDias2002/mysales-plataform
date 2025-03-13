@@ -3,6 +3,7 @@ package br.com.mysales.mysales_plataform.controller;
 import br.com.mysales.mysales_plataform.dto.ClientDTO;
 import br.com.mysales.mysales_plataform.model.Client;
 import br.com.mysales.mysales_plataform.service.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> create(@RequestBody Client client, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ClientDTO> create(@Valid @RequestBody Client client, UriComponentsBuilder uriBuilder){
         var clientDTO = service.create(client);
         var uri = uriBuilder.path("/client/{id}").buildAndExpand(clientDTO.id()).toUri();
         return ResponseEntity.created(uri).body(clientDTO);
